@@ -10,9 +10,8 @@ docker run --rm -v ${PWD}:/local --user 1000:1000 \
     -l python \
     --api-package api \
     --model-package models \
-    --api-package api \
     --git-user-id madpin \
-    --git-repo-id here-public-transit-api \
+    --git-repo-id scg-here-public-transit-api \
     -c /local/config.json \
     -o /local/
 ```

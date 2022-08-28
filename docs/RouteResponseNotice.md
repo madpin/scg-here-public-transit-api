@@ -1,0 +1,12 @@
+# RouteResponseNotice
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**title** | **str** | Human-readable notice description. | [optional] 
+**code** | **str** | Extensible enum: &#x60;noRouteFound&#x60; &#x60;failedRouteHandleCreation&#x60; &#x60;cancelled&#x60; &#x60;routeCalculationFailed&#x60; &#x60;couldNotMatchOrigin&#x60; &#x60;couldNotMatchDestination&#x60; &#x60;violatedTransportModeInRouteHandleDecoding&#x60; &#x60;unknownError&#x60; &#x60;routeLengthLimitExceeded&#x60; &#x60;avoidSegmentsInvalidId&#x60; &#x60;avoidZonesInvalidId&#x60; &#x60;returnToRoute&#x60; &#x60;...&#x60;   Currently known codes (non-exhaustive: this list could be extended for new error situations):  | Code      | Description  | Severity | | --------- | ------- | ------- | | noRouteFound | No Route was found | critical | | failedRouteHandleCreation | No RouteHandle was created | critical | | cancelled | Calculation took too long and was cancelled | critical | | routeCalculationFailed | Calculation did not succeed | critical | | couldNotMatchOrigin | Origin waypoint could not be matched | critical | | couldNotMatchDestination | Destination waypoint could not be matched | critical | | noReachableChargingStationsFound | Initial charge is not enough to reach any known charging stations | critical | | violatedTransportModeInRouteHandleDecoding | Route handle decoding failed due to forbidden segments for the specified transport mode | critical | | unknownError | No detailed error cause has been determined | critical | | routeLengthLimitExceeded | Distance between waypoints is too large for current options | critical | | avoidSegmentsInvalidId | The provided segment ID was not found | info | | avoidZonesInvalidId | The provided zone ID was not found | info | | returnToRoute | Applicable only to requests with route handle provided. Current route position was not on the original route. New route was calculated from the current position to the destination. Old route may have been reused. | info |  | 
+**severity** | [**NoticeSeverity**](NoticeSeverity.md) |  | [optional] 
+**details** | [**list[BaseNoticeDetail]**](BaseNoticeDetail.md) | Additional details about the notice | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
