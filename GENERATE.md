@@ -6,7 +6,7 @@ run:
 ```bash
 docker run --rm -v ${PWD}:/local --user 1000:1000 \
     swaggerapi/swagger-codegen-cli-v3 generate \
-    -i https://developer.here.com/documentation/routing-api/swagger/v8.yaml \
+    -i https://developer.here.com/documentation/public-transit/swagger/transit_api.yaml \
     -l python \
     --api-package api \
     --model-package models \
