@@ -32,6 +32,7 @@ class TransitSpan(object):
         'length': 'Distance',
         'duration': 'Duration',
         'country_code': 'CountryCode',
+        'state_code': 'StateCode',
         'names': 'list[LocalizedString]',
         'segment_id': 'str',
         'segment_ref': 'str',
@@ -43,18 +44,20 @@ class TransitSpan(object):
         'length': 'length',
         'duration': 'duration',
         'country_code': 'countryCode',
+        'state_code': 'stateCode',
         'names': 'names',
         'segment_id': 'segmentId',
         'segment_ref': 'segmentRef',
         'ref_replacements': 'refReplacements'
     }
 
-    def __init__(self, offset=None, length=None, duration=None, country_code=None, names=None, segment_id=None, segment_ref=None, ref_replacements=None):  # noqa: E501
+    def __init__(self, offset=None, length=None, duration=None, country_code=None, state_code=None, names=None, segment_id=None, segment_ref=None, ref_replacements=None):  # noqa: E501
         """TransitSpan - a model defined in Swagger"""  # noqa: E501
         self._offset = None
         self._length = None
         self._duration = None
         self._country_code = None
+        self._state_code = None
         self._names = None
         self._segment_id = None
         self._segment_ref = None
@@ -68,6 +71,8 @@ class TransitSpan(object):
             self.duration = duration
         if country_code is not None:
             self.country_code = country_code
+        if state_code is not None:
+            self.state_code = state_code
         if names is not None:
             self.names = names
         if segment_id is not None:
@@ -164,6 +169,27 @@ class TransitSpan(object):
         self._country_code = country_code
 
     @property
+    def state_code(self):
+        """Gets the state_code of this TransitSpan.  # noqa: E501
+
+
+        :return: The state_code of this TransitSpan.  # noqa: E501
+        :rtype: StateCode
+        """
+        return self._state_code
+
+    @state_code.setter
+    def state_code(self, state_code):
+        """Sets the state_code of this TransitSpan.
+
+
+        :param state_code: The state_code of this TransitSpan.  # noqa: E501
+        :type: StateCode
+        """
+
+        self._state_code = state_code
+
+    @property
     def names(self):
         """Gets the names of this TransitSpan.  # noqa: E501
 
@@ -190,7 +216,7 @@ class TransitSpan(object):
     def segment_id(self):
         """Gets the segment_id of this TransitSpan.  # noqa: E501
 
-        **Disclaimer: This property is currently in beta release, and is therefore subject to breaking changes.**  The directed topology segment id including prefix (e.g '+here:cm:segment:').  The id consists of two parts. * The direction ('+' or '-') * followed by the topology segment id (a unique identifier within the HERE platform catalogs).  The direction specifies whether the route is using the segment in its canonical direction ('+' aka traveling along the geometry's direction), or against it ('-' aka traveling against the geometry's direction).  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests   # noqa: E501
+        **NOTE:** Attribute segmentId is deprecated. Use segmentRef instead.  The directed topology segment id including prefix (e.g '+here:cm:segment:').  The id consists of two parts. * The direction ('+' or '-') * followed by the topology segment id (a unique identifier within the HERE platform catalogs).  The direction specifies whether the route is using the segment in its canonical direction ('+' aka traveling along the geometry's direction), or against it ('-' aka traveling against the geometry's direction).  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests   # noqa: E501
 
         :return: The segment_id of this TransitSpan.  # noqa: E501
         :rtype: str
@@ -201,7 +227,7 @@ class TransitSpan(object):
     def segment_id(self, segment_id):
         """Sets the segment_id of this TransitSpan.
 
-        **Disclaimer: This property is currently in beta release, and is therefore subject to breaking changes.**  The directed topology segment id including prefix (e.g '+here:cm:segment:').  The id consists of two parts. * The direction ('+' or '-') * followed by the topology segment id (a unique identifier within the HERE platform catalogs).  The direction specifies whether the route is using the segment in its canonical direction ('+' aka traveling along the geometry's direction), or against it ('-' aka traveling against the geometry's direction).  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests   # noqa: E501
+        **NOTE:** Attribute segmentId is deprecated. Use segmentRef instead.  The directed topology segment id including prefix (e.g '+here:cm:segment:').  The id consists of two parts. * The direction ('+' or '-') * followed by the topology segment id (a unique identifier within the HERE platform catalogs).  The direction specifies whether the route is using the segment in its canonical direction ('+' aka traveling along the geometry's direction), or against it ('-' aka traveling against the geometry's direction).  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests   # noqa: E501
 
         :param segment_id: The segment_id of this TransitSpan.  # noqa: E501
         :type: str
@@ -213,7 +239,7 @@ class TransitSpan(object):
     def segment_ref(self):
         """Gets the segment_ref of this TransitSpan.  # noqa: E501
 
-        A reference to the HMC topology segment used in this span.  The standard representation of a segment reference has the following structure: {catalogHrn}:{catalogVersion}:({layerId})?:{tileId}:{segmentId}(#{direction}({startOffset}..{endOffset})?)?  The individual parts are: * catalogHrn: The HERE Resource Name that identifies the source catalog of the segment, example: hrn:here:data::olp-here:rib-2 * catalogVersion: The catalog version * layerId (optional): The layer inside the catalog where the segment can be found, example: topology-geometry * tileId: The HERE tile key of the partition/tile where the segment is located in the given version of the catalog. This can be on a lower level than the actual segment is stored at (for example, the provided tile ID can be on level 14, despite topology-geometry partitions being tiled at level 12). The level of a HERE tile key is indicated by the position of the highest set bit in binary representation. Since the HERE tile key represents a morton code of the x and y portion of the Tile ID, the level 12 tile ID can be retrieved from the level 14 tile ID by removing the 4 least significant bits (or 2 bits per level) or 1 hexidecimal digit. For example, the level 14 tile 377894441 is included in the level 12 tile 23618402 (377894441<sub>10</sub> = 16863629<sub>16</sub> &rightarrow; 1686362<sub>16</sub> = 23618402<sub>10</sub>) * segmentId: The identifier of the referenced topology segment inside the catalog, example: here:cm:segment:84905195 * direction (optional): Either '*' for undirected or bidirectional, '+' for positive direction, '-' for negative direction, or '?' for unknown direction (not used by the routing service) * startOffset/endOffset (optional): The start- and end offset are non-negative numbers between 0 and 1, representing the start and end of the referenced range using a proportion of the length of the segment. 0 represents the start and 1 the end of the segment, relative to the indicated direction (or positive direction in case of undirected segments). Example: 0.7..1  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests  Example of a segment reference in standard representation: hrn:here:data::olp-here:rib-2:1363::377894441:here:cm:segment:84905195#+0.7..1  The segment references can also be provided in a compact representation, to reduce the response size. In the compact representation, some parts are replaced by placeholders, which can be resolved using the refReplacements dictionary in the parent section. The placeholder format is \\$\\d+ and need to be surrounded by columns or string start/end. It can be captured with the following regular expression: (^|:)\\$\\d+(:|$)  Example of the segment reference previously mentioned in compact representation: $0:377894441:$1:84905195#+0.7..1 With the corresponding refReplacements: \"refReplacements\": {   \"0\": \"hrn:here:data::olp-here:rib-2:1363:\",   \"1\": \"here:cm:segment\" }   # noqa: E501
+        A reference to the HMC topology segment used in this span.  The standard representation of a segment reference has the following structure: {catalogHrn}:{catalogVersion}:({layerId})?:{tileId}:{segmentId}(#{direction}({startOffset}..{endOffset})?)?  The individual parts are: * catalogHrn: The HERE Resource Name that identifies the source catalog of the segment, example: hrn:here:data::olp-here:rib-2 * catalogVersion: The catalog version * layerId (optional): The layer inside the catalog where the segment can be found, example: topology-geometry * tileId: The HERE tile key of the partition/tile where the segment is located in the given version of the catalog. This can be on a lower level than the actual segment is stored at (for example, the provided tile ID can be on level 14, despite topology-geometry partitions being tiled at level 12). The level of a HERE tile key is indicated by the position of the highest set bit in binary representation. Since the HERE tile key represents a morton code of the x and y portion of the Tile ID, the level 12 tile ID can be retrieved from the level 14 tile ID by removing the 4 least significant bits (or 2 bits per level) or 1 hexidecimal digit. For example, the level 14 tile 377894441 is included in the level 12 tile 23618402 (377894441<sub>10</sub> = 16863629<sub>16</sub> &rightarrow; 1686362<sub>16</sub> = 23618402<sub>10</sub>) * segmentId: The identifier of the referenced topology segment inside the catalog, example: here:cm:segment:84905195 * direction (optional): Either '*' for undirected or bidirectional, '+' for positive direction, '-' for negative direction, or '?' for unknown direction (not used by the routing service) * startOffset/endOffset (optional): The start- and end offset are non-negative numbers between 0 and 1, representing the start and end of the referenced range using a proportion of the length of the segment. 0 represents the start and 1 the end of the segment, relative to the indicated direction (or positive direction in case of undirected segments). Example: 0.7..1  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests  Example of a segment reference in standard representation: hrn:here:data::olp-here:rib-2:1363::377894441:here:cm:segment:84905195#+0.7..1  The segment references can also be provided in a compact representation, to reduce the response size. In the compact representation, some parts are replaced by placeholders, which can be resolved using the refReplacements dictionary in the parent section. The placeholder format is ```\\$\\d+``` and needs to be surrounded by colons or string start/end. It can be captured with the following regular expression: ```(^|:)\\$\\d+(:|$)/``` .  Example of the segment reference previously mentioned in compact representation: $0:377894441:$1:84905195#+0.7..1 With the corresponding refReplacements: \"refReplacements\": {   \"0\": \"hrn:here:data::olp-here:rib-2:1363:\",   \"1\": \"here:cm:segment\" }   # noqa: E501
 
         :return: The segment_ref of this TransitSpan.  # noqa: E501
         :rtype: str
@@ -224,7 +250,7 @@ class TransitSpan(object):
     def segment_ref(self, segment_ref):
         """Sets the segment_ref of this TransitSpan.
 
-        A reference to the HMC topology segment used in this span.  The standard representation of a segment reference has the following structure: {catalogHrn}:{catalogVersion}:({layerId})?:{tileId}:{segmentId}(#{direction}({startOffset}..{endOffset})?)?  The individual parts are: * catalogHrn: The HERE Resource Name that identifies the source catalog of the segment, example: hrn:here:data::olp-here:rib-2 * catalogVersion: The catalog version * layerId (optional): The layer inside the catalog where the segment can be found, example: topology-geometry * tileId: The HERE tile key of the partition/tile where the segment is located in the given version of the catalog. This can be on a lower level than the actual segment is stored at (for example, the provided tile ID can be on level 14, despite topology-geometry partitions being tiled at level 12). The level of a HERE tile key is indicated by the position of the highest set bit in binary representation. Since the HERE tile key represents a morton code of the x and y portion of the Tile ID, the level 12 tile ID can be retrieved from the level 14 tile ID by removing the 4 least significant bits (or 2 bits per level) or 1 hexidecimal digit. For example, the level 14 tile 377894441 is included in the level 12 tile 23618402 (377894441<sub>10</sub> = 16863629<sub>16</sub> &rightarrow; 1686362<sub>16</sub> = 23618402<sub>10</sub>) * segmentId: The identifier of the referenced topology segment inside the catalog, example: here:cm:segment:84905195 * direction (optional): Either '*' for undirected or bidirectional, '+' for positive direction, '-' for negative direction, or '?' for unknown direction (not used by the routing service) * startOffset/endOffset (optional): The start- and end offset are non-negative numbers between 0 and 1, representing the start and end of the referenced range using a proportion of the length of the segment. 0 represents the start and 1 the end of the segment, relative to the indicated direction (or positive direction in case of undirected segments). Example: 0.7..1  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests  Example of a segment reference in standard representation: hrn:here:data::olp-here:rib-2:1363::377894441:here:cm:segment:84905195#+0.7..1  The segment references can also be provided in a compact representation, to reduce the response size. In the compact representation, some parts are replaced by placeholders, which can be resolved using the refReplacements dictionary in the parent section. The placeholder format is \\$\\d+ and need to be surrounded by columns or string start/end. It can be captured with the following regular expression: (^|:)\\$\\d+(:|$)  Example of the segment reference previously mentioned in compact representation: $0:377894441:$1:84905195#+0.7..1 With the corresponding refReplacements: \"refReplacements\": {   \"0\": \"hrn:here:data::olp-here:rib-2:1363:\",   \"1\": \"here:cm:segment\" }   # noqa: E501
+        A reference to the HMC topology segment used in this span.  The standard representation of a segment reference has the following structure: {catalogHrn}:{catalogVersion}:({layerId})?:{tileId}:{segmentId}(#{direction}({startOffset}..{endOffset})?)?  The individual parts are: * catalogHrn: The HERE Resource Name that identifies the source catalog of the segment, example: hrn:here:data::olp-here:rib-2 * catalogVersion: The catalog version * layerId (optional): The layer inside the catalog where the segment can be found, example: topology-geometry * tileId: The HERE tile key of the partition/tile where the segment is located in the given version of the catalog. This can be on a lower level than the actual segment is stored at (for example, the provided tile ID can be on level 14, despite topology-geometry partitions being tiled at level 12). The level of a HERE tile key is indicated by the position of the highest set bit in binary representation. Since the HERE tile key represents a morton code of the x and y portion of the Tile ID, the level 12 tile ID can be retrieved from the level 14 tile ID by removing the 4 least significant bits (or 2 bits per level) or 1 hexidecimal digit. For example, the level 14 tile 377894441 is included in the level 12 tile 23618402 (377894441<sub>10</sub> = 16863629<sub>16</sub> &rightarrow; 1686362<sub>16</sub> = 23618402<sub>10</sub>) * segmentId: The identifier of the referenced topology segment inside the catalog, example: here:cm:segment:84905195 * direction (optional): Either '*' for undirected or bidirectional, '+' for positive direction, '-' for negative direction, or '?' for unknown direction (not used by the routing service) * startOffset/endOffset (optional): The start- and end offset are non-negative numbers between 0 and 1, representing the start and end of the referenced range using a proportion of the length of the segment. 0 represents the start and 1 the end of the segment, relative to the indicated direction (or positive direction in case of undirected segments). Example: 0.7..1  This attribute will not appear for HERE Public Transit v8 and HERE Intermodal Routing v8 requests  Example of a segment reference in standard representation: hrn:here:data::olp-here:rib-2:1363::377894441:here:cm:segment:84905195#+0.7..1  The segment references can also be provided in a compact representation, to reduce the response size. In the compact representation, some parts are replaced by placeholders, which can be resolved using the refReplacements dictionary in the parent section. The placeholder format is ```\\$\\d+``` and needs to be surrounded by colons or string start/end. It can be captured with the following regular expression: ```(^|:)\\$\\d+(:|$)/``` .  Example of the segment reference previously mentioned in compact representation: $0:377894441:$1:84905195#+0.7..1 With the corresponding refReplacements: \"refReplacements\": {   \"0\": \"hrn:here:data::olp-here:rib-2:1363:\",   \"1\": \"here:cm:segment\" }   # noqa: E501
 
         :param segment_ref: The segment_ref of this TransitSpan.  # noqa: E501
         :type: str

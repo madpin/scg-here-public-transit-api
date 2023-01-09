@@ -30,25 +30,30 @@ class TransitRoute(object):
     swagger_types = {
         'id': 'str',
         'notices': 'list[Notice]',
-        'sections': 'list[TransitRouteSection]'
+        'sections': 'list[TransitRouteSection]',
+        'route_labels': 'list[RouteLabel]'
     }
 
     attribute_map = {
         'id': 'id',
         'notices': 'notices',
-        'sections': 'sections'
+        'sections': 'sections',
+        'route_labels': 'routeLabels'
     }
 
-    def __init__(self, id=None, notices=None, sections=None):  # noqa: E501
+    def __init__(self, id=None, notices=None, sections=None, route_labels=None):  # noqa: E501
         """TransitRoute - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._notices = None
         self._sections = None
+        self._route_labels = None
         self.discriminator = None
         self.id = id
         if notices is not None:
             self.notices = notices
         self.sections = sections
+        if route_labels is not None:
+            self.route_labels = route_labels
 
     @property
     def id(self):
@@ -122,6 +127,29 @@ class TransitRoute(object):
             raise ValueError("Invalid value for `sections`, must not be `None`")  # noqa: E501
 
         self._sections = sections
+
+    @property
+    def route_labels(self):
+        """Gets the route_labels of this TransitRoute.  # noqa: E501
+
+        Contains a list of the most important names and route numbers on this route that differentiate it from other alternatives. These names are used to make labels for the main and alternative routes, like \"route1 via A4,D10\", \"route2 via D11,5\" The generated list is expected to be unique for each route in response (but it's not guaranteed)   # noqa: E501
+
+        :return: The route_labels of this TransitRoute.  # noqa: E501
+        :rtype: list[RouteLabel]
+        """
+        return self._route_labels
+
+    @route_labels.setter
+    def route_labels(self, route_labels):
+        """Sets the route_labels of this TransitRoute.
+
+        Contains a list of the most important names and route numbers on this route that differentiate it from other alternatives. These names are used to make labels for the main and alternative routes, like \"route1 via A4,D10\", \"route2 via D11,5\" The generated list is expected to be unique for each route in response (but it's not guaranteed)   # noqa: E501
+
+        :param route_labels: The route_labels of this TransitRoute.  # noqa: E501
+        :type: list[RouteLabel]
+        """
+
+        self._route_labels = route_labels
 
     def to_dict(self):
         """Returns the model properties as a dict"""

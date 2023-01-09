@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "here-public-transit-api"
-VERSION = "8.0.1"
+VERSION = "8.0.1.2"
 # To install the library, run the following
 #
 # python setup.py install

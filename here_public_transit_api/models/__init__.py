@@ -165,8 +165,10 @@ from here_public_transit_api.models.road_info_type import RoadInfoType
 from here_public_transit_api.models.roundabout_enter_action import RoundaboutEnterAction
 from here_public_transit_api.models.roundabout_exit_action import RoundaboutExitAction
 from here_public_transit_api.models.roundabout_pass_action import RoundaboutPassAction
+from here_public_transit_api.models.route_label import RouteLabel
 from here_public_transit_api.models.single_price import SinglePrice
 from here_public_transit_api.models.speed import Speed
+from here_public_transit_api.models.state_code import StateCode
 from here_public_transit_api.models.station_board import StationBoard
 from here_public_transit_api.models.station_board_response import StationBoardResponse
 from here_public_transit_api.models.station_info import StationInfo
